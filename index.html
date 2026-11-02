@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experimental Client</title>
+<meta name="description" content="Experimental client. High FPS optimizations, active bugs and work in progress." />
+
+<style>
+  :root {
+    --bg: #111215;
+    --card-bg: #181a20;
+    --border: #262933;
+    --btn-bg: #22252e;
+    --btn-border: #333846;
+    --btn-shadow: #14161c;
+    --green-bg: #3a8325;
+    --green-hover: #469b2d;
+    --green-border: #56b539;
+    --green-shadow: #1f4714;
+    --amber: #f59e0b;
+    --amber-bg: rgba(245, 158, 11, 0.12);
+    --amber-border: rgba(245, 158, 11, 0.3);
+    --text: #ededed;
+    --text-dim: #8b92a5;
+    --dot-green: #3cd070;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--bg);
+    background-image: 
+      radial-gradient(circle at 50% 15%, rgba(40, 47, 66, 0.45) 0%, transparent 65%),
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 28px 28px, 28px 28px;
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Header */
+  .brand {
+    text-align: center;
+    margin-bottom: 20px;
+    user-select: none;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5.5vw, 2.6rem);
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    text-shadow: 0 4px 0 #18191f, 0 8px 16px rgba(0,0,0,0.6);
+    text-transform: uppercase;
+  }
+
+  .beta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    padding: 4px 12px;
+    background: var(--amber-bg);
+    border: 1px solid var(--amber-border);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Main Card */
+  .card {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  .warning-box {
+    margin-bottom: 18px;
+  }
+
+  .warning-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .warning-desc {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--text-dim);
+  }
+
+  /* Feature highlights */
+  .perks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .perk {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .perk.fps {
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.25);
+  }
+
+  .perk.bugs {
+    color: #fbbf24;
+    border-color: rgba(251, 191, 36, 0.25);
+  }
+
+  /* Countdown Bar */
+  .countdown-wrapper {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .countdown-text {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .countdown-text strong {
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress-bg {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 100%;
+    background: #3b82f6;
+    border-radius: 10px;
+    transition: width 1s linear;
+  }
+
+  /* Buttons */
+  .btn-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .play-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-bottom: 4px solid var(--btn-shadow);
+    border-radius: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.12s ease, border-color 0.12s ease;
+  }
+
+  .play-btn:hover {
+    background: #2b2f3b;
+    border-color: #42485a;
+  }
+
+  .play-btn:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+  }
+
+  /* Stable Green Button */
+  .play-btn.green {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+    border-bottom: 4px solid var(--green-shadow);
+  }
+
+  .play-btn.green:hover {
+    background: var(--green-hover);
+    border-color: #63cb42;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 5px;
+    text-transform: uppercase;
+  }
+
+  .tag-stable {
+    background: rgba(0, 0, 0, 0.35);
+    color: #bbf7d0;
+  }
+
+  .tag-test {
+    background: rgba(0, 0, 0, 0.35);
+    color: #93c5fd;
+  }
+
+  /* Footer */
+  .footer-actions {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cancel-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.15s;
+  }
+
+  .cancel-btn:hover {
+    color: #fff;
+  }
+
+  .discord-link {
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+  }
+
+  .discord-link:hover {
+    opacity: 1;
+  }
+
+  .discord-link img {
+    height: 18px;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="brand">
+    <h1>MessCraft</h1>
+    <div class="beta-tag">
+      <span>⚠️</span>
+      <span>Experimental Branch</span>
+    </div>
+  </header>
+
+  <main class="card">
+    <div class="warning-box">
+      <h2 class="warning-title">Notice: Early Test Client</h2>
+      <p class="warning-desc">
+        You are about to launch an experimental build. This version includes high-performance engine tweaks that may significantly boost your FPS, but it contains known bugs, glitches, and potential crashes.
+      </p>
+    </div>
+
+    <!-- Highlights -->
+    <div class="perks">
+      <div class="perk fps">
+        <span>⚡</span>
+        <span>Much Higher FPS</span>
+      </div>
+      <div class="perk bugs">
+        <span>🐞</span>
+        <span>Unstable & Buggy</span>
+      </div>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="countdown-wrapper">
+      <div class="countdown-text" id="countdown-status">
+        Redirecting to test client in <strong id="seconds">8</strong>s...
+      </div>
+      <div class="progress-bg">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="btn-list">
+      <!-- Stable Version (Recommended) -->
+      <a class="play-btn green" href="https://happinessad.github.io/x/26">
+        <span>Play Stable (26.2)</span>
+        <span class="tag tag-stable">Recommended</span>
+      </a>
+
+      <!-- Proceed to Test Client -->
+      <a class="play-btn" href="https://happinessad.github.io/test/client/" id="test-btn">
+        <span>Proceed to Test Client</span>
+        <span class="tag tag-test">Experimental</span>
+      </a>
+    </div>
+
+    <footer class="footer-actions">
+      <button class="cancel-btn" id="cancel-btn" type="button">Stop auto-redirect</button>
+      <a class="discord-link" href="https://discord.gg/kbzUdZQWgd" target="_blank" rel="noopener noreferrer">
+        <img src="https://discord.com/api/guilds/944634893420343357/widget.png?style=shield" alt="Discord"/>
+      </a>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const TEST_URL = 'https://happinessad.github.io/test/client/';
+  const TOTAL_SECONDS = 8;
+  let remaining = TOTAL_SECONDS;
+  let isCancelled = false;
+
+  const secondsEl = document.getElementById('seconds');
+  const barEl = document.getElementById('progress-bar');
+  const statusEl = document.getElementById('countdown-status');
+  const cancelBtn = document.getElementById('cancel-btn');
+
+  const timer = setInterval(() => {
+    if (isCancelled) return;
+
+    remaining--;
+
+    if (secondsEl) {
+      secondsEl.textContent = remaining;
+    }
+
+    if (barEl) {
+      const percentage = (remaining / TOTAL_SECONDS) * 100;
+      barEl.style.width = Math.max(0, percentage) + '%';
+    }
+
+    if (remaining <= 0) {
+      clearInterval(timer);
+      window.location.href = TEST_URL;
+    }
+  }, 1000);
+
+  // Allow users to pause/stop auto-redirect
+  cancelBtn.addEventListener('click', () => {
+    isCancelled = true;
+    clearInterval(timer);
+    statusEl.textContent = 'Auto-redirect cancelled. Choose a version above.';
+    barEl.style.display = 'none';
+    cancelBtn.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>

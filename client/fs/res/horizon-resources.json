@@ -1,0 +1,74 @@
+{
+  "schema": 7,
+  "minecraft": "26.3",
+  "client_sha256": "4508d006323f24fa02876310c192d739af56516eb259000ac50f0909a68c9a2d",
+  "server_sha256": "a362163eec5d1612d520772bc16e5b39c09e3b234fdc045f56bf544284ee8ae6",
+  "exporter_sha256": "145c943637ed177cc4ef8a85f2484da8afd164868e84a8463882feec1653a860",
+  "health_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaDamageSourceOracle.java": "0cf0126d69d1052dea74a6bfb5a97250ab69d8f7a95360d9c6399fe03376dcd2",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaPlayerHealthOracle.java": "5d6dc93c0140e2b2f953fba7290721079d5a607fa81b051e2ac1e4742ab606f2",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaEntityAttributeOracle.java": "2ad3190a9798ab54bd12e88573028d0ca6a204e2f8a92018aae98b22335213bf"
+  },
+  "health_files_sha256": {
+    "damage-types.json": "ec99090df073d7fdad34de5c8930f9e09e25a04b432bb890120fedefb7bea30f",
+    "damage-tags.json": "df5da1c56b40691bac096e0e8c98a77063b6f056a5f53e75068e5fef89595af8",
+    "damage-catalog.json": "1c40ea4dc7430aa7ad737258a320ef35e72df977370d1a228bc2876d69289598",
+    "player-float-ids.json": "f7d6037166d966e2714b01cff5626f0cc0a02ce883885ec791c93e977afde0e6"
+  },
+  "motion_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaMovementRegistryOracle.java": "49fcc1f4348a8e279dcb916ae149de8c97f15df54ff1a675826b7c6c3dda06d9",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaEntityAttributeOracle.java": "2ad3190a9798ab54bd12e88573028d0ca6a204e2f8a92018aae98b22335213bf",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaHeightmapOracle.java": "145c943637ed177cc4ef8a85f2484da8afd164868e84a8463882feec1653a860",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaBlockLandingOracle.java": "e397acdbaf2702f358c90ba53a804afa26d7f29a278884c0e779b18f1ae40e63",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaCollisionOracle.java": "1d4b42dc2c53c5a52953ea292a836b8d720d0651c5e737f4e6c1949be767e272"
+  },
+  "motion_files_sha256": {
+    "movement-properties.nbt": "4b5646cbb675025efc9ac6e24b024ac2edddfa6725eb8e158357beda622a3888",
+    "attributes.json": "d1e488e4f432888beb9f643904c8bca242d1e2093f53e23e07da305d70cf7106",
+    "landing-definitions.json": "03f7a3aaa6e52c0fabb845fb7a43054538771d14e47e5d8f9a88bb907b7780a9"
+  },
+  "collision_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaCollisionOracle.java": "1d4b42dc2c53c5a52953ea292a836b8d720d0651c5e737f4e6c1949be767e272"
+  },
+  "collision_sha256": "4a274cd720a1bda585b02f50f16e90246576679e1e173c214548c5cbf607ab2d",
+  "render_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaFaceVisibilityOracle.java": "00f5337317bba7a491bb62bbf07b32637657055c6f3076066bb01edf134169a1",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaCollisionOracle.java": "1d4b42dc2c53c5a52953ea292a836b8d720d0651c5e737f4e6c1949be767e272",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaHeightmapOracle.java": "145c943637ed177cc4ef8a85f2484da8afd164868e84a8463882feec1653a860"
+  },
+  "render_files_sha256": {
+    "render-definitions.json": "a4da8642c93972b4b2e7ba4bbe6659f033541ed96339549faea0b74033756bcf",
+    "occlusion.nbt": "173983aae7d9eb23440509a22df7d147eb47ce7005ffc78004d411c3057e6010"
+  },
+  "model_state_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaBlockStateBindingOracle.java": "d1390b829759dcf4b1e2261eda0e1d80dcb39fb9f4027cc5c20dd7373926b507",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaCuboidModelOracle.java": "7526f20513c549483122ab0d5ad24b9e87f38dc2f6aae55addd701a91ac85e43"
+  },
+  "gameplay_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaGameplayFactsExporter.java": "d4865af4bd2ce9d2d99fea430f48193eadacad4054799bd09607dc30999e0324"
+  },
+  "entity_model_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaEntityModelExporter.java": "565148688baef14f14e9d843e050e149333f1b6ce2091325e52d7b2ec1694f41"
+  },
+  "creative_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaCreativeTabsExporter.java": "c04068564b637b83f7e8bd39d062aef77ae305c0247afcf7dd3957e9725cbe48",
+    "mods/horizon/src/test/java/dev/horizonlab/parity/ParityData.java": "79ece73fd3372e0a27c2d7319f1e0b6ae8572a12be3146cf151b07156eac9a27"
+  },
+  "mob_data_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaMobDataExporter.java": "166713d485bcda67327933abf2a85e8dc9fa6d10c07d4c171006e7d0df22410f"
+  },
+  "entity_types_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaEntityTypesExporter.java": "c736ce31cbdb24437b9d85dc543483c08b5b4618bd222d711ca39fd9d0aa852d"
+  },
+  "behaviour_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaBlockBehaviourExporter.java": "0091b8c47697502f9b8d26d4ea4a7316e069538ee71bceb12074ae10ba1ba104"
+  },
+  "command_registries_exporters_sha256": {
+    "mods/horizon/src/test/java/dev/horizonlab/parity/VanillaCommandParseOracle.java": "fa3f912500c7c1656ad6851a78dff3f3fcb37087460f6f51257bd549e63dbb7f"
+  },
+  "model_states_sha256": "c400e5438c957d554324afbad198b4baa8ff21d86a59da53d04943a08fb320a5",
+  "data_version": 5023,
+  "facts_sha256": "1d24883ee807b0b71473f0bbf8ed548ddaf712148caeb3fcc7aa13ab973a97b0",
+  "block_tags_sha256": "5e1301e5a9abf7e4de93af5dae3a157e852dbdb4ea345c2eb626305a605d4f98",
+  "resource_files": 21489
+}
